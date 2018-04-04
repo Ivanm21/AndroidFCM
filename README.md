@@ -2,16 +2,19 @@
 
 ### Installation
 1. Copy listed files to the root folder of your website:
-  * [manifest.json](https://ogw.playtechgaming.com/ezPushSDK-Chrome/master/manifest.json)
-  * [ezpush-sw.js](https://ogw.playtechgaming.com/ezPushSDK-Chrome/master/ezpush-sw.js)
+  * [manifest.json](https://ezpush.techonlinecorp.com/SDK/manifest.json)
+  * [sw.js](https://ezpush.techonlinecorp.com/SDK/sw.js)
 2. Add `<link rel="manifest" href="manifest.json">` to the `<head></head>` section.
 3. Optionally add other data about your website in *manifest.json*, learn more about [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest).
 4. Download *ezpush.json* from Chrome/Firefox settings inside your App and place it to the root folder of your website.
 5. Change `<Your Sender ID from https://console.firebase.google.com>` for each platform in *ezpush.json* file to your Sender ID.
 6. Include JS-file:
-    `<script src="https://ezpush.techonlinecorp.com/firebase-client.js" async></script>`
+    `<script src="https://ezpush.techonlinecorp.com/SDK/ezpush-client.js" async></script>`
 
-The script will use *ezpush-sw.js* and *ezpush.json* from the root folder of your website, it also take into consideration base URL from `<base>` element.
+The script will use *sw.js* and *ezpush.json* from the root folder of your website, it also take into consideration base URL from `<base>` element.
+
+> You can rename **ezpush.json** file and put it to any directory that suites you. Path to ezpush.json should be provide in EzPush init method as shown below. 
+
 
 ### EzPush Web API
 To call any API method use EzPush.push() syntax:
@@ -51,6 +54,21 @@ EzPush.push(['setUserAlias', "User Alias"]);
 EzPush.push(['updateLocation']);                           // current user location
 EzPush.push(['updateLocation', -22.9109878, -43.7285266]); // custom longitude and latitude
  ```
+#### Subscribe
+```javascript
+EzPush.push(['subscribe', {
+    language: 'ro', // taken from  from window.navigator.language by default
+    onError: function,
+    onSuccess: function 
+    }]);
+```
+#### Unsubscribe
+```javascript
+EzPush.push(['unsubscribe', {
+    onError: function,
+    onSuccess: function 
+    }]);
+```
 
 #### Update User Tags
 - **value** should always be String
